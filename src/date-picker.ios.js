@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 
 export default class DatePicker extends PureComponent {
   static propTypes = {
-    date: PropTypes.instanceOf(Date).isRequired,
-    maximumDate: PropTypes.instanceOf(Date),
+    date: PropTypes.instanceOf(Date),
     minimumDate: PropTypes.instanceOf(Date),
+    maximumDate: PropTypes.instanceOf(Date),
     mode: PropTypes.oneOf(['date', 'time', 'datetime']),
     onDateChange: PropTypes.func.isRequired,
   };
@@ -16,22 +16,46 @@ export default class DatePicker extends PureComponent {
     date: new Date(),
   };
 
-  state = {
-    date: null,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: props.date
+    }
+  }
+
+  // state = {
+  //   date: null,
+  // };
+
+  // componentWillMount() {
+  //   this.setState({ date: this.props.date });
+  // }
+
+  // componentDidMount() {
+  //   this.setState({ date: this.props.date });
+  // }
+
+  // componentWillReceiveProps({ date }) {
+  //   this.setState({ date });
+  // }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.date !== prevProps.date) {
+      this.setState({ date: this.props.date })
+    }
+  }
+
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   if (prevState.date !== nextProps.date) {
+  //     return { date: nextProps.date }
+  //   }
+  //   else return null;
+  // }
 
   onDateChange = (date) => {
     this.setState({ date });
     this.props.onDateChange(date);
   };
-
-  componentWillMount() {
-    this.setState({ date: this.props.date });
-  }
-
-  componentWillReceiveProps({ date }) {
-    this.setState({ date });
-  }
 
   render() {
     return (

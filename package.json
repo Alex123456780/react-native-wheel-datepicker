@@ -1,14 +1,14 @@
 {
-  "name": "react-native-wheel-datepicker",
-  "version": "2.2.3",
-  "description": "React native cross platform iOS-style picker and datepicker.",
-  "main": "src/index.js",
+  "name": "go-go-power-pickie",
+  "version": "1.0.0",
+  "description": "React native Android only custom datepicker.",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pinguinjkeke/react-native-wheel-datepicker.git"
+    "url": "git+https://github.com/Alex123456780/react-native-wheel-datepicker.git"
   },
   "keywords": [
     "react-native",
@@ -16,14 +16,14 @@
     "picker",
     "wheel"
   ],
-  "author": "Alexander Avakov <yaavakov@gmail.com>",
-  "license": "MIT",
+  "author": "",
+  "license": "",
   "bugs": {
-    "url": "https://github.com/pinguinjkeke/react-native-wheel-datepicker/issues"
+    "url": "https://github.com/Alex123456780/react-native-wheel-datepicker/issues"
   },
-  "homepage": "https://github.com/pinguinjkeke/react-native-wheel-datepicker#readme",
+  "homepage": "https://github.com/Alex123456780/react-native-wheel-datepicker#readme",
   "dependencies": {
-    "moment": "^2.19.1"
+    "moment": "^2.23.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.0",

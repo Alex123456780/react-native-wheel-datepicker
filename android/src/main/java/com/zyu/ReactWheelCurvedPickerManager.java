@@ -1,6 +1,8 @@
 package com.zyu;
 
 import android.graphics.Color;
+import android.util.Log;
+// logging data on native side - Log.d("the", "one");
 
 import com.aigestudio.wheelpicker.core.AbstractWheelPicker;
 import com.facebook.react.bridge.ReadableArray;
@@ -44,8 +46,10 @@ public class ReactWheelCurvedPickerManager extends SimpleViewManager<ReactWheelC
     }
 
     @ReactProp(name="data")
-    public void setData(ReactWheelCurvedPicker picker, ReadableArray items) {
+    public void setData(ReactWheelCurvedPicker picker, ReadableMap items_info){
         if (picker != null) {
+            int index = items_info.getInt("index");
+            ReadableArray items = items_info.getArray("items");
             ArrayList<Object> valueData = new ArrayList<>();
             ArrayList<String> labelData = new ArrayList<>();
             for (int i = 0; i < items.size(); i ++) {
@@ -61,11 +65,14 @@ public class ReactWheelCurvedPickerManager extends SimpleViewManager<ReactWheelC
             }
             picker.setValueData(valueData);
             picker.setData(labelData);
+            // May Be TODO: if index <= items.size() - 1
+            picker.setItemIndex(index);
         }
     }
 
     @ReactProp(name="selectedIndex")
     public void setSelectedIndex(ReactWheelCurvedPicker picker, int index) {
+        // May Be TODO: edit "if", inspect "invalidate" (Ctrl + Shift + F)
         if (picker != null && picker.getState() == AbstractWheelPicker.SCROLL_STATE_IDLE) {
             picker.setItemIndex(index);
             picker.invalidate();

@@ -1,33 +1,39 @@
 import React, { Component } from 'react';
-import { ColorPropType, StyleSheet, View, ViewPropTypes as RNViewPropTypes, Text } from 'react-native';
+import {
+  ColorPropType,
+  StyleSheet,
+  View,
+  ViewPropTypes as RNViewPropTypes,
+} from 'react-native';
 import PropTypes from 'prop-types';
+
 import WheelCurvedPicker from './WheelCurvedPicker';
+import {
+  emptyFunction,
+} from './Utils'
 
 const ViewPropTypes = RNViewPropTypes || View.propTypes;
 
 const PickerItem = WheelCurvedPicker.Item;
 
-const styles = StyleSheet.create({
-  picker: {
-    backgroundColor: '#d3d3d3',
-    height: 220,
-  },
-});
-
-
+// https://github.com/sjha07/React-Native-PickerIOS-Example/blob/master/index.ios.js - Example
 export default class Picker extends Component {
   static propTypes = {
+    selectedIndex: PropTypes.number,
+    pickerData: PropTypes.array,
+    onValueChange: PropTypes.func,
     textColor: ColorPropType,
     textSize: PropTypes.number,
     itemSpace: PropTypes.number,
     itemStyle: ViewPropTypes.style,
-    onValueChange: PropTypes.func.isRequired,
-    pickerData: PropTypes.array.isRequired,
     style: ViewPropTypes.style,
-    selectedValue: PropTypes.any,
   };
 
   static defaultProps = {
+    selectedIndex: 0,
+    advancedIndex: null,
+    pickerData: ["00"],
+    onValueChange: emptyFunction,
     textColor: '#333',
     textSize: 26,
     itemSpace: 20,
@@ -35,41 +41,42 @@ export default class Picker extends Component {
     style: null,
   };
 
-  state = {
-    selectedValue: this.props.selectedValue,
-  };
-
   handleChange = (selectedValue) => {
-    this.setState({ selectedValue });
     this.props.onValueChange(selectedValue);
   };
 
-  componentWillReceiveProps({ selectedValue }) {
-    this.setState({ selectedValue });
-  }
-
   render() {
-    const { pickerData, style, ...props } = this.props;
+    const {
+      pickerData,
+      selectedIndex,
+      advancedIndex,
+      style,
+      ...props
+    } = this.props;
 
     return (
       <WheelCurvedPicker
         {...props}
         style={[styles.picker, style]}
-        selectedValue={this.state.selectedValue}
         onValueChange={this.handleChange}
+        selectedIndex={selectedIndex}
+        advancedIndex={advancedIndex}
       >
         {pickerData.map((data, index) => (
           <PickerItem
-            key={index}
-            value={typeof data.value !== 'undefined' ? data.value : data}
-            label={typeof data.label !== 'undefined' ? data.label : data.toString()}
+            key={`${data + index}`}
+            value={data}
+            label={`${data}`}
           />
         ))}
       </WheelCurvedPicker>
     );
   }
-
-  getValue() {
-    return this.state.selectedValue;
-  }
 }
+
+const styles = StyleSheet.create({
+  picker: {
+    backgroundColor: '#ffffff',
+    height: 220,
+  },
+});
