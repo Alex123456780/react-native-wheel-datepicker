@@ -1,4 +1,5 @@
 android/build
+android/.project
 *.iml
 android/.idea/workspace.xml
 android/.idea/copyright/profiles_settings.xml
