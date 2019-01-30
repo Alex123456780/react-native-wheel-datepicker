@@ -67,10 +67,11 @@ export default class DatePicker extends PureComponent {
       date,
       order_time_list,
       user_timezone,
+      hour_offset,
     } = props;
     const current_timezone = -(new Date().getTimezoneOffset() / 60);
     const offset = getTimezoneOffset(current_timezone, user_timezone);
-    const date_in_ms = date ? Date.parse(new Date(date)) - offset : Date.now();
+    const date_in_ms = date ? Date.parse(new Date(date)) - offset : Date.now() + hour_offset;
 
     const {
       init_day_pos,
@@ -93,6 +94,7 @@ export default class DatePicker extends PureComponent {
     );
 
     this.time_offset = offset;
+    this.hour_offset = hour_offset;
 
     this.order_time_list = order_time_list;
     this.days = days_arr;
@@ -126,7 +128,7 @@ export default class DatePicker extends PureComponent {
     new_date.setHours(chosen_day_time.hours[chosen_hour_pos]);
     new_date.setMinutes(chosen_day_time.minutes[`${chosen_minutes_value}`][chosen_minute_pos]);
 
-    const canChooseDate = !(Date.parse(new_date) < Date.now() + this.time_offset);
+    const canChooseDate = !(Date.parse(new_date) < Date.now() + this.time_offset + this.hour_offset);
     this.props.onDateChange(
       dateToString(new_date,'-'),
       dateToString(new_date,'/'),
