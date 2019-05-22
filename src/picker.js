@@ -41,8 +41,8 @@ export default class Picker extends Component {
     style: null,
   };
 
-  handleChange = (selectedValue) => {
-    this.props.onValueChange(selectedValue);
+  handleChange = (selectedValue, selectedIndex) => {
+    this.props.onValueChange(selectedValue, selectedIndex);
   };
 
   render() {
@@ -61,6 +61,7 @@ export default class Picker extends Component {
         onValueChange={this.handleChange}
         selectedIndex={selectedIndex}
         advancedIndex={advancedIndex}
+        selectedValue={pickerData[selectedIndex]}
       >
         {pickerData.map((data, index) => (
           <PickerItem

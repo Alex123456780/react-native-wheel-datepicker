@@ -137,7 +137,7 @@ export default class DatePicker extends PureComponent {
     );
   }
 
-  onDaySelected = (position = 0) => {
+  onDaySelected = (value, position = 0) => {
     if (position !== this.state.chosen_day_pos) {
       // let new_chosen_minutes_value = '';
       // let new_chosen_hour_pos = 0;
@@ -173,7 +173,7 @@ export default class DatePicker extends PureComponent {
   }
 
 
-  onHourSelected = (position = 0) => {
+  onHourSelected = (value, position = 0) => {
     const {
       chosen_hour_pos,
       chosen_day,
@@ -203,7 +203,7 @@ export default class DatePicker extends PureComponent {
     }
   };
 
-  onMinuteSelected = (position = 0) => {
+  onMinuteSelected = (value, position = 0) => {
     if (position !== this.state.chosen_minute_pos) {
       this.setState(state => ({
         chosen_minute_pos: position,

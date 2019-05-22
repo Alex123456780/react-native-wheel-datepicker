@@ -42,7 +42,7 @@ public class ReactWheelCurvedPicker extends WheelCurvedPicker {
                 if (mValueData != null && index < mValueData.size()) {
                     mEventDispatcher.dispatchEvent(
                             //get value of picker's current pos - mValueData.get(index)
-                            new ItemSelectedEvent(getId(), index));
+                            new ItemSelectedEvent(getId(), index, mValueData.get(index)));
                 }
             }
 
@@ -88,10 +88,12 @@ class ItemSelectedEvent extends Event<ItemSelectedEvent> {
     public static final String EVENT_NAME = "wheelCurvedPickerPageSelected";
 
     private final Object mValue;
+    private final Object nValue;
 
-    protected ItemSelectedEvent(int viewTag, Object value) {
+    protected ItemSelectedEvent(int viewTag, Object index, Object value) {
         super(viewTag);
-        mValue = value;
+        mValue = index;
+        nValue = value;
     }
 
     @Override
@@ -108,10 +110,12 @@ class ItemSelectedEvent extends Event<ItemSelectedEvent> {
         WritableMap eventData = Arguments.createMap();
 
         Class mValueClass = mValue.getClass();
+        Class nValueClass = nValue.getClass();
         if (mValueClass == Integer.class) {
-            eventData.putInt("data", (Integer) mValue);
-        } else if (mValueClass == String.class) {
-            eventData.putString("data", mValue.toString());
+            eventData.putInt("index", (Integer) mValue);
+        }
+        if (nValueClass == String.class) {
+            eventData.putString("value", nValue.toString());
         }
 
         return eventData;
