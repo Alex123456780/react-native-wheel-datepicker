@@ -30,7 +30,6 @@ class WheelCurvedPicker extends PureComponent {
     ...ViewPropTypes,
     selectedIndex: PropTypes.number,
     onValueChange: PropTypes.func,
-    data: PropTypes.array,
     textColor: ColorPropType,
     textSize: PropTypes.number,
     itemSpace: PropTypes.number,
@@ -40,7 +39,6 @@ class WheelCurvedPicker extends PureComponent {
     selectedIndex: 0,
     advancedIndex: null,
     onValueChange: emptyFunction,
-    data: ["00"],
     textSize: 26,
     itemSpace: 20,
     textColor: '#333',
@@ -66,14 +64,14 @@ class WheelCurvedPicker extends PureComponent {
     } = this.props;
     if (advancedIndex || advancedIndex === 0) {
       if (advancedIndex === this.current_dependent_pos) {
-        onValueChange(value, index);
+        onValueChange(value/*, index*/);
       }
       else {
         this.current_dependent_pos = advancedIndex;
       }
     }
     else {
-      onValueChange(value, index);
+      onValueChange(value/*, index*/);
     }
   };
 

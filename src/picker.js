@@ -41,7 +41,8 @@ export default class Picker extends Component {
     style: null,
   };
 
-  handleChange = (selectedValue, selectedIndex) => {
+  handleChange = (selectedValue/*, selectedIndex*/) => {
+    const selectedIndex = this.props.pickerData.findIndex(el => el === selectedValue);
     this.props.onValueChange(selectedValue, selectedIndex);
   };
 

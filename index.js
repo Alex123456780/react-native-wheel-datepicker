@@ -4,7 +4,7 @@
 import Picker from './src/picker';
 import DatePicker from './src/date-picker';
 
-let DatePickerComponent = DatePicker;
+// let DatePickerComponent = DatePicker;
 
 // const registerCustomDatePickerIOS = (CustomDatePickerIOS) => {
 //   if (Platform.OS === 'ios') {
@@ -16,6 +16,7 @@ let DatePickerComponent = DatePicker;
 
 export {
   Picker,
-  DatePickerComponent as DatePicker,
+  DatePicker,
+  // DatePickerComponent as DatePicker,
   // registerCustomDatePickerIOS,
 };
